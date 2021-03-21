@@ -32,11 +32,11 @@ jobs:
       - name: Deploy generated files
         run: |
           git checkout --orphan gh-pages
-          git rm -rf .
+          git rm -rf . > /dev/null 2>&1
           mv out/* .
           rm overwritten.log || true
           git config user.name "$GITHUB_ACTOR"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git add .
-          git commit -m "Deploy"
-          git push origin gh-pages
+          git add . > /dev/null 2>&1
+          git commit -m "Deploy" > /dev/null 2>&1
+          git push --force origin gh-pages
